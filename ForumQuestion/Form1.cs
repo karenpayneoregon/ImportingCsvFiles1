@@ -12,7 +12,7 @@ namespace ForumQuestion
             Shown += Form1_Shown;
         }
 
-        private void Form1_Shown(object sender, System.EventArgs e)
+        private void Form1_Shown(object sender, EventArgs e)
         {
             var fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
                 "Import1.txt");

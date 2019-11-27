@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ForumQuestionTabbed
+namespace ForumQuestionTabbed.Classes
 {
     public class FileOperations
     {
@@ -34,8 +34,12 @@ namespace ForumQuestionTabbed
                         isFirstLine = false;
                         if (!string.IsNullOrWhiteSpace(line))
                         {
-                            var lineDataArgs = new LineDataArgs(Array.ConvertAll(line.Split('\t'), p => p.Trim()));
+                            var lineDataArgs = new LineDataArgs(
+                                Array.ConvertAll(
+                                    line.Split('\t'), p => p.Trim()));
+
                             OnLineHandler(this, lineDataArgs);
+
                         }
 
                         continue;
@@ -61,15 +65,5 @@ namespace ForumQuestionTabbed
             return linesList;
         }
 
-    }
-    public class LineDataArgs : EventArgs
-    {
-        protected string[] Line;
-
-        public LineDataArgs(string[] sender)
-        {
-            Line = sender;
-        }
-        public string[] LineArray => Line;
     }
 }

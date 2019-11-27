@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using ForumQuestionTabbed.Classes;
 
 namespace ForumQuestionTabbed
 {
@@ -9,6 +10,7 @@ namespace ForumQuestionTabbed
         public Form1()
         {
             InitializeComponent();
+            dataGridView1.AllowUserToAddRows = false;
             Shown += Form1_Shown;
         }
 
@@ -25,10 +27,23 @@ namespace ForumQuestionTabbed
             {
                 dataGridView1.Rows.Add(rowData);
             }
+
+            ActiveControl = dataGridView1;
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            dataGridView1.Rows[0].Selected = true;
         }
+        /// <summary>
+        /// Set column header text to the array elements containing the
+        /// first line read from the file.
+        /// </summary>
+        /// <param name="myObject"></param>
+        /// <param name="args"></param>
         private void FileOperations_OnReadingFirstLine(object myObject, LineDataArgs args)
         {
-            Console.WriteLine(string.Join(",",args.LineArray));
+            for (int index = 0; index < args.LineArray.Length; index++)
+            {
+                dataGridView1.Columns[index].HeaderText = args.LineArray[index];
+            }
         }
     }
 }
